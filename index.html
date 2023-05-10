@@ -11,11 +11,11 @@
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         #map {
-            width: 1297px;
-            height: 827px;
+            width: 1264px;
+            height: 856px;
         }
         </style>
-        <title>Bilan diagnostics Flavescence dorée - Campagne 2022</title>
+        <title>Zones Délimitées  2023 - Version projet (sous réserve d'officialisation par Arrêté Préfectoral)</title>
     </head>
     <body>
         <div id="map">
@@ -31,8 +31,8 @@
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="data/CommunesAOCChampagne_1.js"></script>
-        <script src="data/Prelevements_Prospections_Volontaires_2.js"></script>
-        <script src="data/Prelevements_Prospections_Obligatoires_3.js"></script>
+        <script src="data/PrimtredesurveillancedesZonesDlimites2023_2.js"></script>
+        <script src="data/ZonedeluttespcifiquecontrelacicadelleFD2023_3.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -97,7 +97,7 @@
             return {
                 pane: 'pane_CommunesAOCChampagne_1',
                 opacity: 1,
-                color: 'rgba(0,0,0,0.06274509803921569)',
+                color: 'rgba(161,157,157,0.1803921568627451)',
                 dashArray: '',
                 lineCap: 'square',
                 lineJoin: 'bevel',
@@ -119,7 +119,8 @@
             style: style_CommunesAOCChampagne_1_0,
         });
         bounds_group.addLayer(layer_CommunesAOCChampagne_1);
-        function pop_Prelevements_Prospections_Volontaires_2(feature, layer) {
+        map.addLayer(layer_CommunesAOCChampagne_1);
+        function pop_PrimtredesurveillancedesZonesDlimites2023_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -130,78 +131,43 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Prospection volontaire - ZE</th>\
-                        <td>' + (feature.properties['TYPE_ZONE'] !== null ? autolinker.link(feature.properties['TYPE_ZONE'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Commune</th>\
-                        <td>' + (feature.properties['COMMUNE'] !== null ? autolinker.link(feature.properties['COMMUNE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Variant du phytoplasme FD</th>\
-                        <td>' + (feature.properties['type_Phyto'] !== null ? autolinker.link(feature.properties['type_Phyto'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Nom_ZD2022'] !== null ? autolinker.link(feature.properties['Nom_ZD2022'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Prelevements_Prospections_Volontaires_2_0(feature) {
-            switch(String(feature.properties['q2wHide_FD_ANALYSE'])) {
-                case 'P':
-                    return {
-                pane: 'pane_Prelevements_Prospections_Volontaires_2',
-                radius: 4.8,
+        function style_PrimtredesurveillancedesZonesDlimites2023_2_0() {
+            return {
+                pane: 'pane_PrimtredesurveillancedesZonesDlimites2023_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(42,228,255,0.9568627450980393)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(238,36,198,1.0)',
+                weight: 3.0, 
+                fillOpacity: 0,
                 interactive: true,
-            }
-                    break;
-                case 'P pool':
-                    return {
-                pane: 'pane_Prelevements_Prospections_Volontaires_2',
-                radius: 4.8,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(238,36,198,1.0)',
-                interactive: true,
-            }
-                    break;
             }
         }
-        map.createPane('pane_Prelevements_Prospections_Volontaires_2');
-        map.getPane('pane_Prelevements_Prospections_Volontaires_2').style.zIndex = 402;
-        map.getPane('pane_Prelevements_Prospections_Volontaires_2').style['mix-blend-mode'] = 'normal';
-        var layer_Prelevements_Prospections_Volontaires_2 = new L.geoJson(json_Prelevements_Prospections_Volontaires_2, {
+        map.createPane('pane_PrimtredesurveillancedesZonesDlimites2023_2');
+        map.getPane('pane_PrimtredesurveillancedesZonesDlimites2023_2').style.zIndex = 402;
+        map.getPane('pane_PrimtredesurveillancedesZonesDlimites2023_2').style['mix-blend-mode'] = 'normal';
+        var layer_PrimtredesurveillancedesZonesDlimites2023_2 = new L.geoJson(json_PrimtredesurveillancedesZonesDlimites2023_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Prelevements_Prospections_Volontaires_2',
-            layerName: 'layer_Prelevements_Prospections_Volontaires_2',
-            pane: 'pane_Prelevements_Prospections_Volontaires_2',
-            onEachFeature: pop_Prelevements_Prospections_Volontaires_2,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Prelevements_Prospections_Volontaires_2_0(feature));
-            },
+            dataVar: 'json_PrimtredesurveillancedesZonesDlimites2023_2',
+            layerName: 'layer_PrimtredesurveillancedesZonesDlimites2023_2',
+            pane: 'pane_PrimtredesurveillancedesZonesDlimites2023_2',
+            onEachFeature: pop_PrimtredesurveillancedesZonesDlimites2023_2,
+            style: style_PrimtredesurveillancedesZonesDlimites2023_2_0,
         });
-        bounds_group.addLayer(layer_Prelevements_Prospections_Volontaires_2);
-        map.addLayer(layer_Prelevements_Prospections_Volontaires_2);
-        function pop_Prelevements_Prospections_Obligatoires_3(feature, layer) {
+        bounds_group.addLayer(layer_PrimtredesurveillancedesZonesDlimites2023_2);
+        map.addLayer(layer_PrimtredesurveillancedesZonesDlimites2023_2);
+        function pop_ZonedeluttespcifiquecontrelacicadelleFD2023_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -212,76 +178,57 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Prospection obligatoire - ZD</th>\
-                        <td>' + (feature.properties['TYPE_ZONE'] !== null ? autolinker.link(feature.properties['TYPE_ZONE'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Commune</th>\
-                        <td>' + (feature.properties['COMMUNE'] !== null ? autolinker.link(feature.properties['COMMUNE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Variant du phytoplasme FD</th>\
-                        <td>' + (feature.properties['Type_Phyto'] !== null ? autolinker.link(feature.properties['Type_Phyto'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['aoc_petite'] !== null ? autolinker.link(feature.properties['aoc_petite'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_Prelevements_Prospections_Obligatoires_3_0(feature) {
-            switch(String(feature.properties['q2wHide_Diag_FD'])) {
-                case 'P':
-                    return {
-                pane: 'pane_Prelevements_Prospections_Obligatoires_3',
-                radius: 4.8,
+        function style_ZonedeluttespcifiquecontrelacicadelleFD2023_3_0() {
+            return {
+                pane: 'pane_ZonedeluttespcifiquecontrelacicadelleFD2023_3',
                 opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
+                color: 'rgba(234,194,24,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(238,36,198,1.0)',
+                weight: 2.0, 
+                fillOpacity: 0,
                 interactive: true,
             }
-                    break;
-            }
         }
-        map.createPane('pane_Prelevements_Prospections_Obligatoires_3');
-        map.getPane('pane_Prelevements_Prospections_Obligatoires_3').style.zIndex = 403;
-        map.getPane('pane_Prelevements_Prospections_Obligatoires_3').style['mix-blend-mode'] = 'normal';
-        var layer_Prelevements_Prospections_Obligatoires_3 = new L.geoJson(json_Prelevements_Prospections_Obligatoires_3, {
+        map.createPane('pane_ZonedeluttespcifiquecontrelacicadelleFD2023_3');
+        map.getPane('pane_ZonedeluttespcifiquecontrelacicadelleFD2023_3').style.zIndex = 403;
+        map.getPane('pane_ZonedeluttespcifiquecontrelacicadelleFD2023_3').style['mix-blend-mode'] = 'normal';
+        var layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3 = new L.geoJson(json_ZonedeluttespcifiquecontrelacicadelleFD2023_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Prelevements_Prospections_Obligatoires_3',
-            layerName: 'layer_Prelevements_Prospections_Obligatoires_3',
-            pane: 'pane_Prelevements_Prospections_Obligatoires_3',
-            onEachFeature: pop_Prelevements_Prospections_Obligatoires_3,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.circleMarker(latlng, style_Prelevements_Prospections_Obligatoires_3_0(feature));
-            },
+            dataVar: 'json_ZonedeluttespcifiquecontrelacicadelleFD2023_3',
+            layerName: 'layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3',
+            pane: 'pane_ZonedeluttespcifiquecontrelacicadelleFD2023_3',
+            onEachFeature: pop_ZonedeluttespcifiquecontrelacicadelleFD2023_3,
+            style: style_ZonedeluttespcifiquecontrelacicadelleFD2023_3_0,
         });
-        bounds_group.addLayer(layer_Prelevements_Prospections_Obligatoires_3);
-        map.addLayer(layer_Prelevements_Prospections_Obligatoires_3);
+        bounds_group.addLayer(layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3);
+        map.addLayer(layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3);
         map.on("zoomend", function(e) {
             if (map.getZoom() <= 17 && map.getZoom() >= 12) {
                 map.addLayer(layer_CommunesAOCChampagne_1);
             } else if (map.getZoom() > 17 || map.getZoom() < 12) {
                 map.removeLayer(layer_CommunesAOCChampagne_1);
             }
-            if (map.getZoom() <= 14 && map.getZoom() >= 8) {
-                map.addLayer(layer_Prelevements_Prospections_Volontaires_2);
-            } else if (map.getZoom() > 14 || map.getZoom() < 8) {
-                map.removeLayer(layer_Prelevements_Prospections_Volontaires_2);
+            if (map.getZoom() <= 18 && map.getZoom() >= 2) {
+                map.addLayer(layer_PrimtredesurveillancedesZonesDlimites2023_2);
+            } else if (map.getZoom() > 18 || map.getZoom() < 2) {
+                map.removeLayer(layer_PrimtredesurveillancedesZonesDlimites2023_2);
             }
-            if (map.getZoom() <= 14 && map.getZoom() >= 8) {
-                map.addLayer(layer_Prelevements_Prospections_Obligatoires_3);
-            } else if (map.getZoom() > 14 || map.getZoom() < 8) {
-                map.removeLayer(layer_Prelevements_Prospections_Obligatoires_3);
+            if (map.getZoom() <= 18 && map.getZoom() >= 2) {
+                map.addLayer(layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3);
+            } else if (map.getZoom() > 18 || map.getZoom() < 2) {
+                map.removeLayer(layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3);
             }
         });
             if (map.getZoom() <= 17 && map.getZoom() >= 12) {
@@ -289,15 +236,15 @@
             } else if (map.getZoom() > 17 || map.getZoom() < 12) {
                 map.removeLayer(layer_CommunesAOCChampagne_1);
             }
-            if (map.getZoom() <= 14 && map.getZoom() >= 8) {
-                map.addLayer(layer_Prelevements_Prospections_Volontaires_2);
-            } else if (map.getZoom() > 14 || map.getZoom() < 8) {
-                map.removeLayer(layer_Prelevements_Prospections_Volontaires_2);
+            if (map.getZoom() <= 18 && map.getZoom() >= 2) {
+                map.addLayer(layer_PrimtredesurveillancedesZonesDlimites2023_2);
+            } else if (map.getZoom() > 18 || map.getZoom() < 2) {
+                map.removeLayer(layer_PrimtredesurveillancedesZonesDlimites2023_2);
             }
-            if (map.getZoom() <= 14 && map.getZoom() >= 8) {
-                map.addLayer(layer_Prelevements_Prospections_Obligatoires_3);
-            } else if (map.getZoom() > 14 || map.getZoom() < 8) {
-                map.removeLayer(layer_Prelevements_Prospections_Obligatoires_3);
+            if (map.getZoom() <= 18 && map.getZoom() >= 2) {
+                map.addLayer(layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3);
+            } else if (map.getZoom() > 18 || map.getZoom() < 2) {
+                map.removeLayer(layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3);
             }
             var title = new L.Control();
             title.onAdd = function (map) {
@@ -306,7 +253,7 @@
                 return this._div;
             };
             title.update = function () {
-                this._div.innerHTML = '<h2>Bilan diagnostics Flavescence dorée - Campagne 2022</h2>';
+                this._div.innerHTML = '<h2>Zones Délimitées  2023 - Version projet (sous réserve d\'officialisation par Arrêté Préfectoral)</h2>';
             };
             title.addTo(map);
         var osmGeocoder = new L.Control.Geocoder({
@@ -319,6 +266,8 @@
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/ZonedeluttespcifiquecontrelacicadelleFD2023_3.png" /> Zone de lutte spécifique contre la cicadelle FD - 2023': layer_ZonedeluttespcifiquecontrelacicadelleFD2023_3,'<img src="legend/PrimtredesurveillancedesZonesDlimites2023_2.png" /> Périmètre de surveillance des Zones Délimitées - 2023': layer_PrimtredesurveillancedesZonesDlimites2023_2,'<img src="legend/CommunesAOCChampagne_1.png" /> Communes AOC Champagne': layer_CommunesAOCChampagne_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
         setBounds();
         resetLabels([layer_CommunesAOCChampagne_1]);
         map.on("zoomend", function(){
